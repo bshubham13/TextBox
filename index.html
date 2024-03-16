@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Text Box</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+    <h1 align="center" class="heading"> TEXT BOX </h1>
+    <div class="container" align="center">
+        <form class="textboxform">
+            <label>Enter Your Text Below</label>
+            <br><br>
+            <textarea id="text" rows="10" cols="70" onkeyup="updateInfo()" autofocus></textarea>
+            <br><br>
+            <button type="button" onclick="transformUpperCase()">UPPERCASE</button>
+            <button type="button" onclick="transformLowerCase()">LOWERCASE</button>
+            <button type="button" onclick="findText()">Find</button>
+            <button type="button" onclick="changeColor()">CHANGE COLOR</button>
+            <button type="button" onclick="textUnderline()">UNDERLINE</button>
+            <button type="button" onclick="copyText()">COPY</button>
+            <button type="button" onclick="clearText()">CLEAR</button>
+            <button type="button" onclick="reverseText()">REVERSE</button>
+            <br><br>
+            <h2 id="textinfo">This text contains 0 words and 0 characters.</h2>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+
+        // Get references to HTML elements
+let text = document.getElementById("text");
+let textInfo = document.getElementById("textinfo");
+let clr;
+
+// Function to transform text to uppercase
+function transformUpperCase() {
+    text.value = text.value.toUpperCase();
+}
+
+// Function to transform text to lowercase
+function transformLowerCase(){
+    text.value = text.value.toLowerCase();
+}
+
+// Function to find text in the textarea
+function findText() {
+    let searchText = prompt("Enter the text : ");
+    if (text.value.includes(searchText)) {
+        alert(`Search text "${searchText}" is present.`);
+    } else {
+        alert(`Search text "${searchText}" is not present.`);
+    }
+}
+
+// Function to change text color
+function changeColor() {
+    clr = prompt(("Enter Your Favourite Color : ").toLowerCase())
+    text.style.color = clr;
+}
+
+// Function to underline text
+function textUnderline() {
+    text.style.textDecoration = `underline 2px solid ${clr}`
+}
+
+// Function to copy text to clipboard
+function copyText() {
+    navigator.clipboard.writeText(text.value)
+}
+
+// Function to clear text
+function clearText() {
+    text.value = '';
+    updateInfo();
+}
+
+// Function to reverse text
+function reverseText() {
+    let reversedText = text.value.split('').reverse().join('');
+    text.value = reversedText;
+    updateInfo();
+}
+
+
+// Function to update text information
+function updateInfo() {
+    let numberOfWords = text.value.trim().split(" ").length
+    textInfo.innerHTML = `This text contains ${numberOfWords} words and ${text.value.length} characters`
+}
+
+        
+    </script>
+</body>
+</html>
